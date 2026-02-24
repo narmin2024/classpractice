@@ -4,6 +4,7 @@
 <head>
     <title>Bloomsy</title>
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
 
@@ -13,9 +14,10 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">Contact</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="signup.html">Sign Up</a></li>
+            <li><a href="Login.html">Login</a></li>
+            <li><a href="Sign.html">Sign Up</a></li>
         </ul>
+        <button id="theme-toggle" style="margin-left: 20px; padding: 5px 10px; cursor: pointer;">🌙 Dark Mode</button>
     </nav>
 
 
@@ -96,7 +98,6 @@
     </div>
 </section>
 
-<!-- New Footer -->
 
 <footer class="main-footer">
 
@@ -153,6 +154,29 @@
     }
 
     setInterval(nextSlide, 4000);
+
+    const toggleButton = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme');
+
+    // Apply saved theme on load
+    if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        toggleButton.textContent = currentTheme === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+    }
+
+    toggleButton.addEventListener('click', () => {
+        let theme = document.documentElement.getAttribute('data-theme');
+
+        if (theme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            toggleButton.textContent = '🌙 ';
+            localStorage.setItem('theme', 'light');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            toggleButton.textContent = '☀️';
+            localStorage.setItem('theme', 'dark');
+        }
+    });
 </script>
 
 </body>
